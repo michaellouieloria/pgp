@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Pretty Good Privacy (PGP)</title>
+
+		<meta name="description" content="Pretty Good Privacy (PGP) for Bicol IT Tech Talk 3">
+		<meta name="author" content="Michael Louie Loria">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>PGP</h1>
+					<h3>Pretty Good Privacy</h3>
+					<p>
+						<small>Presentation by Michael Louie Loria</small>
+					</p>
+				</section>
+
+				<section>
+                    <section>
+                        <img src="images/history-of-encryption.png">
+                        <p>
+                            source: <a href="http://computercheckup.aol.com/articles/infographics/history-of-encryption/">http://computercheckup.aol.com/articles/infographics/history-of-encryption/</a></li>
+                        </p>                      
+                    </section>
+                    <section>
+                        <h2>Transposition Cipher</h2>
+                        <img src="images/transposition-cipher.jpg">
+                    </section>                    
+                    <section>
+                        <h2>Caesar Cipher</h2>
+                        <img src="images/caesar-cipher.jpg">
+                    </section>
+                    <section>
+                        <h2>Frequency Analysis</h2>
+                        <p>Frequency analysis is the study of the frequency of letters or groups of letters in a ciphertext. The method is used as an aid to breaking classical ciphers.</p>
+                        <img src="images/letter-frequency.png">
+                    </section>
+                    <section>
+                        <h2>GnuPG</h2>
+                        <p>
+                            GnuPG is the GNU project's complete and free implementation of the OpenPGP standard as defined by RFC4880 . GnuPG allows to encrypt and sign your data and communication, features a versatile key management system as well as access modules for all kinds of public key directories. GnuPG, also known as GPG, is a command line tool with features for easy integration with other applications. A wealth of frontend applications and libraries are available.
+                        </p>
+                        <p>
+                            source: <a href="http://gnupg.org/" target="_blank">http://gnupg.org/</a>
+                        </p>
+                        <br/>
+                        <h4>links:</h4>
+                        <ul>
+                            <li>GNU - <a href="http://www.gnu.org/">http://www.gnu.org/</a></li>
+                            <li>Free Software - <a href="http://www.gnu.org/philosophy/free-sw.html">http://www.gnu.org/philosophy/free-sw.html</a></li>
+                            <li>GNU GPL - <a href="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</a></li>
+                        </ul>                        
+                    </section>
+                   
+				</section>
+                
+				<section>
+                    <section>
+                        <h2>PGP</h2>
+                        <p>
+                            Pretty Good Privacy (PGP) is a data encryption and decryption computer program that provides cryptographic privacy and authentication for data communication. PGP is often used for signing, encrypting, and decrypting texts, e-mails, files, directories, and whole disk partitions to increase the security of e-mail communications                    						
+                        </p>
+                        <p>
+                            source: <a href="http://en.wikipedia.org/wiki/Pretty_Good_Privacy" target="_blank">http://en.wikipedia.org/wiki/Pretty_Good_Privacy</a>
+                        </p>
+                    </section>
+                    <section>
+                        <h2>OpenPGP</h2>
+                        <p>
+                            OpenPGP is a non-proprietary protocol for encrypting email using public key cryptography. It is based on PGP as originally developed by Phil Zimmermann. The OpenPGP protocol defines standard formats for encrypted messages, signatures, and certificates for exchanging public keys.
+                        </p>
+                        <p>
+                            source: <a href="http://www.openpgp.org/" target="_blank">http://www.openpgp.org/</a>
+                        </p>
+                    </section>
+                    <section>
+                        <h2>GnuPG</h2>
+                        <p>
+                            GnuPG is the GNU project's complete and free implementation of the OpenPGP standard as defined by RFC4880 . GnuPG allows to encrypt and sign your data and communication, features a versatile key management system as well as access modules for all kinds of public key directories. GnuPG, also known as GPG, is a command line tool with features for easy integration with other applications. A wealth of frontend applications and libraries are available.
+                        </p>
+                        <p>
+                            source: <a href="http://gnupg.org/" target="_blank">http://gnupg.org/</a>
+                        </p>
+                        <br/>
+                        <h4>links:</h4>
+                        <ul>
+                            <li>GNU - <a href="http://www.gnu.org/">http://www.gnu.org/</a></li>
+                            <li>Free Software - <a href="http://www.gnu.org/philosophy/free-sw.html">http://www.gnu.org/philosophy/free-sw.html</a></li>
+                            <li>GNU GPL - <a href="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</a></li>
+                        </ul>                        
+                    </section>
+                   
+				</section>
+
+				<section>
+                    <section>
+                        <h2>Introduction</h2>
+                        <p>
+                            PGP encryption uses a serial combination of hashing, data compression, symmetric-key cryptography, and finally public-key cryptography; each step uses one of several supported algorithms.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Hashing</h2>
+                        <p>
+                            A cryptographic hash function is a hash function that takes an arbitrary block of data and returns a fixed-size bit string, the cryptographic hash value, such that any (accidental or intentional) change to the data will (with very high probability) change the hash value. The data to be encoded are often called the message, and the hash value is sometimes called the message digest or simply digest.                            
+                        </p>
+                        <img width="320" height="299" alt="Meny" src="images/hash.png" class="fragment">
+                        <p class="fragment">
+                            Common functions: MD5, SHA-1, SHA-2, SHA-3/Keccak
+                        <p>
+                    </section>
+                    <section>
+                        <h2>Data compression</h2>
+                        <p>
+                            In computer science and information theory, data compression, source coding, or bit-rate reduction involves encoding information using fewer bits than the original representation.
+                        </p>
+                        <img width="320" height="299" alt="Meny" src="images/hash.png" class="fragment">
+                        <p class="fragment">
+                            Uses: PNG, Zip, MP3, MPEG
+                        <p>
+                    </section>
+                    <section>
+                        <h2>Symmetric-key cryptography</h2>
+                        <p>
+                            Symmetric key encryption is also known as shared-key, single-key, secret-key, and private-key or one-key encryption. In this type of message encryption, both sender and receiver share the same key which is used to both encrypt and decrypt messages. Sender and receiver only have to specify the shared key in the beginning and then they can begin to encrypt and decrypt messages between them using that key.
+                        </p>
+                      
+                        <p class="fragment">
+                            Common Algorithms: AES, Blowfish, DES, Triple DES, Serpent, Twofish
+                        <p>
+                    </section>
+                    <section style="font-size: 25px;">
+                        <h2>Advantages</h2>
+                        <ul>                        
+                            <li>Simple: This type of encryption is easy to carry out. All users have to do is specify and share the secret key and then begin to encrypt and decrypt messages.</li>
+                            <li>Encrypt and decrypt your own files: If you use encryption for messages or files which you alone intend to access, there is no need to create different keys. Single-key encryption is best for this.</li>
+                            <li>Fast: Symmetric key encryption is much faster than asymmetric key encryption.</li>
+                            <li>Uses less computer resources: Single-key encryption does not require a lot of computer resources when compared to public key encryption.</li>
+                            <li>Prevents widespread message security compromise: A different secret key is used for communication with every different party. If a key is compromised, only the messages between a particular pair of sender and receiver are affected. Communications with other people are still secure.</li>
+                        </ul>
+                        <br/><br/>
+                        <h2>Disadvantages</h2>
+                        <ul>      
+                            <li>Need for secure channel for secret key exchange: Sharing the secret key in the beginning is a problem in symmetric key encryption. It has to be exchanged in a way that ensures it remains secret.</li>
+                            <li>Too many keys: A new shared key has to be generated for communication with every different party. This creates a problem with managing and ensuring the security of all these keys.</li>
+                            <li>Origin and authenticity of message cannot be guaranteed: Since both sender and receiver use the same key, messages cannot be verified to have come from a particular user. This may be a problem if there is a dispute.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Asymmetric-key/Public-key cryptography</h2>
+                        <p>
+                            This method of encrypting messages makes use of two keys: a public key and a private key.The public key is made publicly available and is used to encrypt messages by anyone who wishes to send a message to the person that the key belongs to. The private key is kept secret and is used to decrypt received messages.
+                        </p>
+                      
+                        <p class="fragment">
+                            Common Algorithms: RSA, DSA, ElGamal
+                        <p>
+                    </section>
+                    <section style="font-size: 25px;">
+                        <h2>Advantages</h2>
+                        <ul>
+                            <li>Convenience: It solves the problem of distributing the key for encryption.Everyone publishes their public keys and private keys are kept secret.</li>
+                            <li>Provides for message authentication: Public key encryption allows the use of digital signatures which enables the recipient of a message to verify that the message is truly from a particular sender.</li>
+                            <li>Detection of tampering: The use of digital signatures in public key encryption allows the receiver to detect if the message was altered in transit. A digitally signed message cannot be modified without invalidating the signature.</li>
+                            <li>Provide for non-repudiation: Digitally signing a message is akin to physically signing a document. It is an acknowledgement of the message and thus, the sender cannot deny it.</li>
+                        </ul>
+                        <br/><br/>
+                        <h2>Disadvantages</h2>
+                        <ul>
+                            <li>Public keys should/must be authenticated: No one can be absolutely sure that a public key belongs to the person it specifies and so everyone must verify that their public keys belong to them.</li> 
+                            <li>Slow: Public key encryption is slow compared to symmetric encryption. Not feasible for use in decrypting bulk messages.</li> 
+                            <li>Uses up more computer resources: It requires a lot more computer supplies compared to single-key encryption.</li> 
+                            <li>Widespread security compromise is possible: If an attacker determines a person's private key, his or her entire messages can be read.</li> 
+                            <li>Loss of private key may be irreparable: The loss of a private key means that all received messages cannot be decrypted.</li>
+                        </ul>
+                    </section>                    
+				</section>
+                
+				<section>
+					<h1>THE END</h1>
+				</section> 
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
