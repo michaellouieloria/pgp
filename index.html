@@ -217,6 +217,16 @@
                             Common Algorithms: RSA, DSA, ElGamal
                         <p>
                     </section>
+                    <section>
+                        <h2>How PGP encryption works</h2>
+                        <img src="images/pgp-diagram.png">
+                    </section>
+                    <section>
+                        <h2>PGP encryption</h2>
+                        <p>When a user encrypts plaintext with PGP, PGP first compresses the plaintext. Data compression saves modem transmission time and disk space and, more importantly, strengthens cryptographic security. PGP then creates a session key, which is a one-time-only secret key. This key is a random number generated from the random movements of your mouse and the keystrokes you type. This session key works with a very secure, fast conventional encryption algorithm to encrypt the plaintext; the result is ciphertext. Once the data is encrypted, the session key is then encrypted to the recipient's public key. This public key-encrypted session key is transmitted along with the ciphertext to the recipient.</p>
+                        <h2>PGP decryption</h2>
+                        <p>Decryption works in the reverse. The recipient's copy of PGP uses his or her private key to recover the temporary session key, which PGP then uses to decrypt the conventionally-encrypted ciphertext.</p>
+                    </section>
                     <section style="font-size: 25px;">
                         <h2>Advantages</h2>
                         <ul>
@@ -235,16 +245,320 @@
                             <li>Loss of private key may be irreparable: The loss of a private key means that all received messages cannot be decrypted.</li>
                         </ul>
                     </section>
+
+                </section>
+
+                <section>
                     <section>
-                        <h2>How PGP encryption works</h2>
-                        <img src="images/pgp-diagram.png">
+                        <h2>Getting Started</h2>
+                        <ol>
+                            <li>Generating a new keypair</li>
+                            <li>Exchanging keys</li>
+                            <li>Encrypting and decrypting documents</li>
+                            <li>Making and verifying signatures</li>
+                        </ol>
                     </section>
-                    <section>
-                        <h2>PGP encryption</h2>
-                        <p>When a user encrypts plaintext with PGP, PGP first compresses the plaintext. Data compression saves modem transmission time and disk space and, more importantly, strengthens cryptographic security. PGP then creates a session key, which is a one-time-only secret key. This key is a random number generated from the random movements of your mouse and the keystrokes you type. This session key works with a very secure, fast conventional encryption algorithm to encrypt the plaintext; the result is ciphertext. Once the data is encrypted, the session key is then encrypted to the recipient's public key. This public key-encrypted session key is transmitted along with the ciphertext to the recipient.</p>
-                        <h2>PGP decryption</h2>
-                        <p>Decryption works in the reverse. The recipient's copy of PGP uses his or her private key to recover the temporary session key, which PGP then uses to decrypt the conventionally-encrypted ciphertext.</p>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Generating a new keypair
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --gen-key
+                            ```
+                            ```
+                            gpg (GnuPG) 2.0.22; Copyright (C) 2013 Free Software Foundation, Inc.
+                            This is free software: you are free to change and redistribute it.
+                            There is NO WARRANTY, to the extent permitted by law.
+
+                            Please select what kind of key you want:
+                               (1) RSA and RSA (default)
+                               (2) DSA and Elgamal
+                               (3) DSA (sign only)
+                               (4) RSA (sign only)
+                            Your selection? 1
+                            ```
+                            ```
+                            RSA keys may be between 1024 and 4096 bits long.
+                            What keysize do you want? (2048)
+                            Requested keysize is 2048 bits
+                            ```
+                            ```
+                            Please specify how long the key should be valid.
+                                     0 = key does not expire
+                                  <n>  = key expires in n days
+                                  <n>w = key expires in n weeks
+                                  <n>m = key expires in n months
+                                  <n>y = key expires in n years
+                            Key is valid for? (0) 1
+                            Key expires at 01/16/14 11:51:58 Malay Peninsula Standard Time
+                            Is this correct? (y/N) y
+                            ```
+                        </script>
                     </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Generating a new keypair
+                            ```
+                            GnuPG needs to construct a user ID to identify your key.
+
+                            Real name: alice
+                            Email address: alice@mic.localhost
+                            Comment:
+                            You selected this USER-ID:
+                                "alice <alice@mic.localhost>"
+
+                            Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? o
+                            ```
+                            ```
+                            You need a Passphrase to protect your secret key.
+
+                            gpg: AllowSetForegroundWindow(8360) failed: Access is denied.
+
+                            We need to generate a lot of random bytes. It is a good idea to perform
+                            some other action (type on the keyboard, move the mouse, utilize the
+                            disks) during the prime generation; this gives the random number
+                            generator a better chance to gain enough entropy.
+                            ```
+                            ```
+                            gpg: checking the trustdb
+                            gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+                            gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+                            gpg: next trustdb check due at 2014-01-16
+                            pub   2048R/C08670A4 2014-01-15 [expires: 2014-01-16]
+                                  Key fingerprint = B50C F9B4 0042 A5E9 35C5  8C98 DC54 379B C086 70A4
+                            uid                  alice <alice@mic.localhost>
+                            sub   2048R/06F2342F 2014-01-15 [expires: 2014-01-16]
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Generating a revocation certificate
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG\bin>gpg --output c:/revoke.asc --gen-revoke alice
+                            ```
+                            ```
+                            sec  2048R/C08670A4 2014-01-15 alice <alice@mic.localhost>
+
+                            Create a revocation certificate for this key? (y/N) y
+                            Please select the reason for the revocation:
+                              0 = No reason specified
+                              1 = Key has been compromised
+                              2 = Key is superseded
+                              3 = Key is no longer used
+                              Q = Cancel
+                            (Probably you want to select 1 here)
+                            Your decision? 3
+                            Enter an optional description; end it with an empty line:
+                            > Sample key
+                            >
+                            Reason for revocation: Key is no longer used
+                            Sample key
+                            Is this okay? (y/N) y
+
+                            You need a passphrase to unlock the secret key for
+                            user: "alice <alice@mic.localhost>"
+                            2048-bit RSA key, ID C08670A4, created 2014-01-15
+
+                            ASCII armored output forced.
+                            Revocation certificate created.
+
+                            Please move it to a medium which you can hide away; if Mallory gets
+                            access to this certificate he can use it to make your key unusable.
+                            It is smart to print this certificate and store it away, just in case
+                            your media become unreadable.  But have some caution:  The print system of
+                            your machine might store the data and make it available to others!
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Exchanging Keys
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --list-keys
+                            ```
+                            ```
+                            C:/Users/mic/AppData/Roaming/gnupg/pubring.gpg
+                            ----------------------------------------------
+                            pub   2048R/C08670A4 2014-01-15 [expires: 2014-01-16]
+                            uid                  alice <alice@mic.localhost>
+                            sub   2048R/06F2342F 2014-01-15 [expires: 2014-01-16]
+                            ```
+                            ## Exporting
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --output alice.gpg --export alice@mic.localhost
+                            ```
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --armor --export alice@mic.localhost
+                            -----BEGIN PGP PUBLIC KEY BLOCK-----
+                            Version: GnuPG v2.0.22 (MingW32)
+
+                            mQENBFLWBh4BCACqE8NFUmKgf3IGXjJSXjLiypsgsxwzL6vf6JIIuvh2IeM+UP4n
+                            k+l2KiepnwEMhV0u3J6Cl3M1Na1hU6WtKj4sDWLd7wcJ9vVlzXdMd9C4XIAO7yxh
+                            kxnfJQontdinAR8P1lmfVF+Z+C/hJ+W/zs8BMLXfcaj0lp0/R0plYyGblTeWL+uG
+                            45mu5MwyhlcfTz3nitRAbPxOqFOezyKvzKfF3xC10Kq/36L6ooxiau/mxexSEYMA
+                            IbB4be3577qqs1ARNTSum/6G7AEvc/A5chw5SSNBvAPdDlXBuSdi3YVURIHw8au/
+                            ```
+                            ## Importing
+                            ```
+                            gpg --import bob.gpg
+                            gpg: key 9E98BC16: public key imported
+                            gpg: Total number processed: 1
+                            gpg:               imported: 1
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Signing
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --edit-key bob@mic.localhost
+                            ```
+                            ```
+                            gpg (GnuPG) 2.0.22; Copyright (C) 2013 Free Software Foundation, Inc.
+                            This is free software: you are free to change and redistribute it.
+                            There is NO WARRANTY, to the extent permitted by law.
+
+                            Secret key is available.
+
+                            pub  2048R/443D753D  created: 2014-01-15  expires: 2014-01-16  usage: SCA
+                                                 trust: ultimate      validity: ultimate
+                            sub  2048R/20DD490D  created: 2014-01-15  expires: 2014-01-16  usage: E
+                            [ultimate] (1). bob <bob@mic.localhost>
+                            ```
+                            ```
+                            gpg> fpr
+                            pub   2048R/443D753D 2014-01-15 bob <bob@mic.localhost>
+                             Primary key fingerprint: 22D5 D416 65C4 CFCA 292E  16FD 5088 BAA7 443D 753D
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Signing
+                            ```
+                            gpg> sign
+
+                            pub  2048R/443D753D  created: 2014-01-15  expires: 2014-01-16  usage: SCA
+                                                 trust: ultimate      validity: ultimate
+                             Primary key fingerprint: 22D5 D416 65C4 CFCA 292E  16FD 5088 BAA7 443D 753D
+
+                                 bob <bob@mic.localhost>
+
+                            This key is due to expire on 2014-01-16.
+                            Are you sure that you want to sign this key with your
+                            key "alice <alice@mic.localhost>" (C08670A4)
+
+                            Really sign? (y/N) y
+                            ```
+                            ```
+                            gpg> check
+                            uid  bob <bob@mic.localhost>
+                            sig!3        443D753D 2014-01-15  [self-signature]
+                            sig!         C08670A4 2014-01-15  alice <alice@mic.localhost>
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Encrypting
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --output c:\sample.enc --encrypt --recipient bob c:\sample.text
+                            ```
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG\bin>gpg --armor --output c:\sample.asc --encrypt --recipient bob c:\sample.txt
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Decrypting
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --output c:\sample.dec --decrypt c:\sample.enc
+                            ```
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --output c:\sample.dsc --decrypt c:\sample.asc
+                            ```
+                            ```
+                            gpg: encrypted with 2048-bit RSA key, ID 20DD490D, created 2014-01-15
+                                  "bob <bob@mic.localhost>"
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Making signatures
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --output c:\sample.sig --sign c:\sample.txt
+                            ```
+                            ## Verifying signatures
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --output c:\sample.dig --decrypt c:\sample.sig
+                            ```
+                            ```
+                            gpg: Signature made 01/15/14 15:50:08 Malay Peninsula Standard Time using RSA key ID C08670A4
+                            gpg: Good signature from "alice <alice@mic.localhost>"
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Clearsigned signatures
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --clearsign c:\sample.txt
+                            ```
+                            ## Verifying clearsigned signatures
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --verify c:\sample.txt.asc
+                            ```
+                            ```
+                            gpg: Signature made 01/15/14 16:01:14 Malay Peninsula Standard Time using RSA key ID C08670A4
+                            gpg: Good signature from "alice <alice@mic.localhost>"
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Detached signatures
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --output c:\detached.sig --detach-sig c:\sample.txt
+                            ```
+                            ## Verifying detached signatures
+                            ```
+                            C:\Program Files (x86)\GNU\GnuPG>gpg --verify c:\detached.sig c:\sample.txt
+                            ```
+                            ```
+                            gpg: Signature made 01/15/14 16:13:48 Malay Peninsula Standard Time using RSA key ID C08670A4
+                            gpg: Good signature from "alice <alice@mic.localhost>"
+                            ```
+                        </script>
+                    </section>
+                </section>
+
+                <section>
+                    <h1>Mailvelope</h1>
+                    <p>Mailvelope is a browser extension that allows to exchange encrypted emails following the OpenPGP encryption standard.</p>
+                    <img src="images/mailvelope.png" class="fragment">
+                </section>
+
+                <section>
+                    <h1>Mailpile</h1>
+                    <p>A modern, fast web-mail client with user-friendly encryption and privacy features</p>
+                    <img src="images/mailpile.png" class="fragment">
+                </section>
+
+                <section>
+                    <h1>Links</h1>
+                    <ul>
+                        <li><a href="http://www.gnupg.org/" target="_blank">GNU Privacy Guard</a></li>
+                        <li><a href="http://www.gpg4win.org/" target="_blank">Gpg4win (GNU Privacy Guard for Windows)</a></li>
+                        <li><a href="http://www.gnupg.org/gph/en/manual/book1.html" target="_blank">The GNU Privacy Handbook</a></li>
+                        <li><a href="https://www.mozilla.org/thunderbird/" target="_blank">Mozilla Thunderbird</a></li>
+                        <li><a href="https://addons.mozilla.org/en-US/thunderbird/addon/enigmail/" target="_blank">Enigmail</a></li>
+                        <li><a href="http://www.mailvelope.com/" target="_blank">Mailvelope</a></li>
+                        <li><a href="https://www.mailpile.is/" target="_blank">Mailpile</a></li>
+                        <li><a href="http://www.youtube.com/watch?v=kYasb426Yjk" target="_blank">Paper and Pencil RSA (starring the extended Euclidean algorithm)</a></li>
+                        <li><a href="http://arstechnica.com/security/2013/10/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/">A (relatively easy to understand) primer on elliptic curve cryptography</a>
+                    </ul>
                 </section>
 
                 <section>
